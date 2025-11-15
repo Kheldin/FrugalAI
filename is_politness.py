@@ -35,7 +35,6 @@ POLITESSE = [
     "à toute",
 ]
 
-
 def is_politeness(message: str) -> bool:
     msg = message.lower().strip()
     if len(msg) < 20 and any(p in msg for p in POLITESSE):
