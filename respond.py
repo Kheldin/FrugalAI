@@ -43,6 +43,9 @@ keywords = {
         "see you",
         "see u",
         "bye",
+        "quit",
+        "exit",
+        "close",
         "later",
         "farewell",
     ],
@@ -74,8 +77,8 @@ def is_valid_message(message):
         return False
     
     # DÉPLACÉ APRÈS detect_category - ne plus vérifier ici
-    # if len(message) <= 2 and message not in ["?", "!!"]:
-    #     return False
+    if len(message) <= 2 and message not in ["?", "!!"]:
+        return False
     
     if not any(c.isalnum() for c in message):
         return False
