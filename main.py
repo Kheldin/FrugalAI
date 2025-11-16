@@ -2,7 +2,7 @@ from rich.console import Console
 from rich.panel import Panel
 import importlib
 import respond
-from model_interface import call_ai_model  # ← AJOUTER
+from model_interface import call_ai_model
 
 console = Console()
 
@@ -30,12 +30,11 @@ while True:
     # Si catégorie détectée → réponse simple (FRUGAL !)
     if category:
         bot_response = respond.respond(user_input)
+        console.print(f"[bold cyan]Bot:[/bold cyan] {bot_response}")
     else:
         # Pas de catégorie → utiliser le modèle IA
         console.print("[yellow]🤖 Redirecting to AI model...[/yellow]")
-        bot_response = call_ai_model(user_input)
-    
-    console.print(f"[bold cyan]Bot:[/bold cyan] {bot_response}")
+        call_ai_model(user_input)  # N'affiche plus "Bot: None"
     
     # Si au revoir, quitter
     if category == "reply_goodbye":

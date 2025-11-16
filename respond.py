@@ -73,8 +73,9 @@ def is_valid_message(message):
     if len(message) == 0:
         return False
     
-    if len(message) <= 2 and message not in ["?", "!!"]:
-        return False
+    # DÉPLACÉ APRÈS detect_category - ne plus vérifier ici
+    # if len(message) <= 2 and message not in ["?", "!!"]:
+    #     return False
     
     if not any(c.isalnum() for c in message):
         return False
@@ -92,6 +93,11 @@ def detect_category(message):
     message = normalize_message(message)
     message = message.strip()
     message_words = message.split()
+    
+    # VÉRIFICATION LONGUEUR DÉPLACÉE ICI (après normalisation)
+    # Si le message est trop court (≤ 2 caractères) et n'est pas dans les exceptions
+    if len(message) <= 2 and message not in ["?", "!!", "hi", "yo", "ok", "ty"]:
+        return None
     
     # Si le message est trop long (> 5 mots), rediriger vers l'IA
     if len(message_words) > 5:
@@ -134,4 +140,3 @@ def respond(message):
     if category:
         return random.choice(responses[category])
     return "You will be redirected shortly..."
-
